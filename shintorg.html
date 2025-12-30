@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шинторг Сургут - Шины, диски, автосервис</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛞</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+        }
+
+        .company-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            max-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .company-logo {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+        }
+
+        .company-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 25px 20px 15px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 5px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 2px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .contact-item:hover {
+            background: #eef5ff;
+            transform: translateX(5px);
+            border-left-color: #3498db;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .phone .icon { background: #27ae60; }
+        .address .icon { background: #8e44ad; }
+        .email .icon { background: #e74c3c; }
+        .social .icon { background: #3498db; }
+
+        .contact-text {
+            flex-grow: 1;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 3px;
+            font-weight: 500;
+        }
+
+        .contact-value {
+            font-size: 1.05rem;
+            color: #2c3e50;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .phone-number, .contact-value a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .phone-number:hover, .contact-value a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: #eef5ff;
+            transform: translateY(-5px);
+            border-color: #3498db;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+        }
+
+        .telegram-icon {
+            background: linear-gradient(135deg, #0088cc, #00b3ff);
+            color: white;
+        }
+
+        .max-icon {
+            background: linear-gradient(135deg, #00a859, #00cc6a);
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .social-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .social-handle {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            text-align: center;
+        }
+
+        .telegram .social-name { color: #0088cc; }
+        .max .social-name { color: #00a859; }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Стили для кнопок навигации */
+        .navigation-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 15px;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            background: #219653;
+        }
+
+        .nav-btn.yandex {
+            background: #ff0000;
+        }
+
+        .nav-btn.yandex:hover {
+            background: #cc0000;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .nav-btn.google {
+            background: #4285f4;
+        }
+
+        .nav-btn.google:hover {
+            background: #3367d6;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .nav-btn .btn-icon {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .address-with-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .hero-section {
+                height: 200px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .social-links {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .logo-overlay {
+                max-width: 120px;
+                padding: 10px;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Герой-секция с фото компании и логотипом -->
+        <div class="hero-section">
+            <!-- ФОТО КОМПАНИИ Шинторг Сургут -->
+            <img src="https://i.ibb.co/Fb1kwbH7/photo-2025-12-30-10-02-32.jpg" 
+                 alt="Фото компании Шинторг Сургут" 
+                 class="company-photo"
+                 id="companyPhoto">
+            
+            <!-- Логотип компании поверх фото -->
+            <div class="logo-overlay">
+                <!-- ЛОГОТИП КОМПАНИИ -->
+                <img src="https://yadi.sk/i/Cbe7InuWKHbLQA" 
+                     alt="Логотип Шинторг Сургут" 
+                     class="company-logo"
+                     id="companyLogo">
+            </div>
+            
+            <div class="company-info">
+                <h1>Шинторг Сургут</h1>
+                <p class="tagline">Шины, диски, автосервис</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Контакты</div>
+                
+                <div class="contact-item phone">
+                    <div class="icon">📱</div>
+                    <div class="contact-text">
+                        <div class="contact-label">Основной телефон</div>
+                        <a href="tel:+79326263356" class="contact-value phone-number">+7 (932) 626-33-56</a>
+                    </div>
+                </div>
+
+                <div class="contact-item phone">
+                    <div class="icon">📱</div>
+                    <div class="contact-text">
+                        <div class="contact-label">Дополнительный телефон</div>
+                        <a href="tel:+79227963356" class="contact-value phone-number">+7 (922) 796-33-56</a>
+                    </div>
+                </div>
+
+                <div class="contact-item phone">
+                    <div class="icon">📱</div>
+                    <div class="contact-text">
+                        <div class="contact-label">Дополнительный телефон</div>
+                        <a href="tel:+79222493409" class="contact-value phone-number">+7 (922) 249-34-09</a>
+                    </div>
+                </div>
+
+                <div class="contact-item address">
+                    <div class="icon">📍</div>
+                    <div class="contact-text">
+                        <div class="contact-label">Адрес</div>
+                        <div class="address-with-nav">
+                            <div class="contact-value">г. Сургут, ул. Индустриальная, д. 38</div>
+                            <!-- Кнопки навигации -->
+                            <div class="navigation-buttons">
+                                <a href="https://yandex.ru/maps/?text=Сургут, ул. Индустриальная, 38, Шинторг" 
+                                   target="_blank" 
+                                   class="nav-btn yandex">
+                                    <span class="btn-icon">🗺️</span> Яндекс Карты
+                                </a>
+                                <a href="https://maps.google.com/maps?q=Сургут, ул. Индустриальная, 38, Шинторг" 
+                                   target="_blank" 
+                                   class="nav-btn google">
+                                    <span class="btn-icon">🗺️</span> Google Карты
+                                </a>
+                                <a href="https://2gis.ru/surgut/search/Сургут, ул. Индустриальная, 38" 
+                                   target="_blank" 
+                                   class="nav-btn">
+                                    <span class="btn-icon">🗺️</span> 2ГИС
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-item email">
+                    <div class="icon">✉️</div>
+                    <div class="contact-text">
+                        <div class="contact-label">Электронная почта</div>
+                        <a href="mailto:info@shintorg86.ru" class="contact-value">info@shintorg86.ru</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Мы в мессенджерах</div>
+                <div class="social-links">
+                    <!-- Телеграм канал с новой ссылкой -->
+                    <a href="https://t.me/+RuwS3bYPtos1ODIy" target="_blank" class="social-link telegram">
+                        <div class="social-icon telegram-icon">✈️</div>
+                        <div class="social-name">Telegram</div>
+                        <div class="social-handle">Наш канал</div>
+                    </a>
+                    <!-- MAX с ссылкой на номер -->
+                    <a href="https://max.ru/?phone=+79227963356" target="_blank" class="social-link max">
+                        <div class="social-icon max-icon">MAX</div>
+                        <div class="social-name">MAX</div>
+                        <div class="social-handle">+7 (922) 796-33-56</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© <span id="currentYear"></span> Шинторг Сургут. Все права защищены.</p>
+            <p style="margin-top: 5px; font-size: 0.8rem; opacity: 0.8;">г. Сургут, ул. Индустриальная, д. 38</p>
+        </div>
+    </div>
+
+    <script>
+        // === ССЫЛКИ НА ИЗОБРАЖЕНИЯ ===
+        
+        // Основное фото компании с imgbb.com
+        const photoUrl = 'https://i.ibb.co/Fb1kwbH7/photo-2025-12-30-10-02-32.jpg';
+        
+        // Логотип компании с Яндекс.Диска
+        const logoUrl = 'https://yadi.sk/i/Cbe7InuWKHbLQA';
+
+        // Загружаем фото компании
+        const companyPhoto = document.getElementById('companyPhoto');
+        companyPhoto.src = photoUrl;
+        
+        companyPhoto.onerror = function() {
+            console.log('Фото не загрузилось');
+            this.style.display = 'none';
+        };
+        
+        companyPhoto.onload = function() {
+            console.log('Фото компании успешно загружено');
+        };
+
+        // Загружаем логотип компании
+        const companyLogo = document.getElementById('companyLogo');
+        companyLogo.src = logoUrl;
+        
+        companyLogo.onerror = function() {
+            console.log('Логотип не загрузился');
+            document.querySelector('.logo-overlay').style.display = 'none';
+        };
+        
+        companyLogo.onload = function() {
+            console.log('Логотип компании успешно загружен');
+        };
+
+        // Автоматическое обновление года
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Определяем устройство для умных ссылок
+        function getNavigationLink() {
+            const address = "Сургут, ул. Индустриальная, 38";
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Для мобильных устройств открываем в приложениях
+                if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                    // Для iOS
+                    return `maps://maps.google.com/maps?daddr=${encodeURIComponent(address)}`;
+                } else {
+                    // Для Android
+                    return `geo:0,0?q=${encodeURIComponent(address)}`;
+                }
+            } else {
+                // Для десктопа - Яндекс Карты
+                return `https://yandex.ru/maps/?text=${encodeURIComponent(address)}`;
+            }
+        }
+
+        // Добавляем умную кнопку навигации
+        document.addEventListener('DOMContentLoaded', function() {
+            const smartNavBtn = document.createElement('a');
+            smartNavBtn.href = getNavigationLink();
+            smartNavBtn.className = 'nav-btn';
+            smartNavBtn.target = '_blank';
+            smartNavBtn.innerHTML = '<span class="btn-icon">🚗</span> Проложить маршрут';
+            
+            const navButtons = document.querySelector('.navigation-buttons');
+            navButtons.insertBefore(smartNavBtn, navButtons.firstChild);
+            
+            // Добавляем эффект при загрузке
+            document.querySelector('.card').style.opacity = '0';
+            document.querySelector('.card').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.card').style.transition = 'all 0.5s ease';
+                document.querySelector('.card').style.opacity = '1';
+                document.querySelector('.card').style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Для MAX также добавляем ссылку на прямой звонок
+            const maxLink = document.querySelector('.social-link.max');
+            maxLink.addEventListener('click', function(e) {
+                if (/Android|iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                    // На мобильных устройствах предлагаем выбор
+                    e.preventDefault();
+                    if (confirm('Открыть MAX или позвонить на номер?')) {
+                        window.location.href = 'https://max.ru/?phone=+79227963356';
+                    } else {
+                        window.location.href = 'tel:+79227963356';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
